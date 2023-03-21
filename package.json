@@ -1,0 +1,22 @@
+{
+  "name": "squid-observability-configs",
+  "version": "1.0.0",
+  "description": "Classe bibliotecada que centraliza as configurações comuns entre as bibliotecas de observabilidade da Squid.",
+  "main": "squid_observability-configs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/squidit/squid-observability-configs.git"
+  },
+  "author": "Filipe Dircksen & Henrique Martini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/squidit/squid-observability-configs/issues"
+  },
+  "homepage": "https://github.com/squidit/squid-observability-configs#readme",
+  "dependencies": {
+    "squid-error": "file:libraries/squid-error-nodejs"
+  }
+}

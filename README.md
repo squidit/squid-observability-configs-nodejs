@@ -1,4 +1,4 @@
-# Squid Observability Configs
+# Squid Observability Configs NodeJS
 
 Classe bibliotecada que centraliza as configurações comuns entre as bibliotecas de observabilidade da Squid.
 

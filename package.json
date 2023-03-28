@@ -1,5 +1,5 @@
 {
-  "name": "squid-observability-configs-nodejs",
+  "name": "squid-observability-configs",
   "version": "1.0.0",
   "description": "Classe bibliotecada que centraliza as configurações comuns entre as bibliotecas de observabilidade da Squid.",
   "main": "squid_observability_configs.js",

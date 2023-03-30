@@ -1,4 +1,4 @@
-const SquidError = require('squid-error');
+const { SquidError } = require('squid-error');
 
 const squidObservabilityConfigsUniqueSymbol = Symbol.for('squidObservabilityConfigsSingleton');
 const globalSymbols = Object.getOwnPropertySymbols(global);

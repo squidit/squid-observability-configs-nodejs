@@ -84,7 +84,7 @@ class ObservabilityConfigs
     return global[squidObservabilityConfigsUniqueSymbol];
   }
 
-  static #GetGlobalConfig ()
+  static _GetGlobalConfig ()
   {
     return global[squidObservabilityConfigsUniqueSymbol];
   }

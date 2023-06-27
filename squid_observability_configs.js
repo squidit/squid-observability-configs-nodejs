@@ -91,22 +91,22 @@ class ObservabilityConfigs
 
   static get projectId ()
   {
-    return this.#GetGlobalConfig().projectId;
+    return this._GetGlobalConfig().projectId;
   }
 
   static get credentials ()
   {
-    return this.#GetGlobalConfig().credentials;
+    return this._GetGlobalConfig().credentials;
   }
 
   static get serviceContext ()
   {
-    return this.#GetGlobalConfig().serviceContext;
+    return this._GetGlobalConfig().serviceContext;
   }
 
   static get sourceReference ()
   {
-    return this.#GetGlobalConfig().sourceReference;
+    return this._GetGlobalConfig().sourceReference;
   }
 };
 

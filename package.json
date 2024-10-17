@@ -4,6 +4,7 @@
   "description": "Classe bibliotecada que centraliza as configurações comuns entre as bibliotecas de observabilidade da Squid.",
   "main": "squid_observability_configs.js",
   "scripts": {
+    "build": "npx -p typescript tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

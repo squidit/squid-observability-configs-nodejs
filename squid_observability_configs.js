@@ -32,67 +32,71 @@ const globalSymbols = Object.getOwnPropertySymbols(global);
  * @property {string} [revisionId]
  */
 
+/**
+ * @typedef {Object} ObservabilitySettings
+ * @property {string} projectId
+ * @property {'production' | 'staging' | 'local' | 'test' | string & {}} environment
+ * @property {string} applicationName
+ * @property {string} version
+ * @property {string} [credentialsFilename]
+ * @property {string} [credentialsStringifiedObject]
+ * @property {ServiceAccountCredentials} [credentialsObject]
+ * @property {string} [applicationRepository]
+ * @property {string} [applicationRevisionId]
+
+ */
+
 class ObservabilityConfigs
 {
   /**
-   * @param {string} projectId
-   * @param {string | object} credentials
-   * @param {'production' | 'staging' | 'local' | 'test' | string & {}} environment
-   * @param {string} applicationName
-   * @param {string} version
-   * @param {string} [applicationRepository]
-   * @param {string} [applicationRevisionId]
+   * @param {ObservabilitySettings} observabilitySettings
    */
-  constructor (projectId, credentials, environment, applicationName, version, applicationRepository, applicationRevisionId)
+  constructor (observabilitySettings)
   {
-    this._projectId = projectId;
+    this._projectId = observabilitySettings.projectId;
 
     /** @type {ServiceContext} */
     this._serviceContext = {
-      environment     : environment,
-      service         : `${applicationName} - ${environment}`,
-      version         : version,
-      applicationName : applicationName
+      environment     : observabilitySettings.environment,
+      service         : `${observabilitySettings.applicationName} - ${observabilitySettings.environment}`,
+      version         : observabilitySettings.version,
+      applicationName : observabilitySettings.applicationName
     };
 
     /** @type {SourceReference} */
     this._sourceReference = {
-      repository : applicationRepository,
-      revisionId : applicationRevisionId
+      repository : observabilitySettings.applicationRepository,
+      revisionId : observabilitySettings.applicationRevisionId
     };
 
-
-    if (typeof credentials === 'string')
-    {
-      try
-      {
-        /** @type {{credentials: ServiceAccountCredentials}} */
-        this._credentials = { credentials : JSON.parse(credentials) };
+    if(observabilitySettings.credentialsFilename) {
+      this._credentials = { keyFilename: observabilitySettings.credentialsFilename}
+    }
+    else if (observabilitySettings.credentialsStringifiedObject) {
+      try {
+        this._credentials = { credentials: JSON.parse(observabilitySettings.credentialsStringifiedObject) };
       }
-      catch (error)
-      {
+      catch (error) {
         throw SquidError.Create({
           message : 'Invalid credentials string provided for the Squid Observability library',
           code    : 'SOC001',
           detail  : { 
-            credentials,
+            credentials: observabilitySettings.credentialsStringifiedObject,
             originalErrorMessage: error instanceof Error ? error.message : 'unknown error',
             originalErrorStack: error instanceof Error ? error.stack : 'unknown stack'
           },
           id      : 0
-        });
+        })
       }
     }
-    else if (typeof credentials === 'object' && credentials !== null)
-    {
-      this._credentials = { credentials }
+    else if (observabilitySettings.credentialsObject) {
+      this._credentials = { credentials: observabilitySettings.credentialsObject }
     }
-    else
-    {
+    else {
       throw SquidError.Create({
         message : 'Invalid credentials object provided for the Squid Observability library',
         code    : 'SOC002',
-        detail  : { credentials },
+        detail  : { observabilitySettings },
         id      : 0
       });
     }
@@ -105,7 +109,7 @@ class ObservabilityConfigs
   }
 
 
-  /** @returns {{credentials: ServiceAccountCredentials}} */
+  /** @returns {{credentials: ServiceAccountCredentials} | {keyFilename: string}} */
   get credentials ()
   {
     return this._credentials;
@@ -151,7 +155,7 @@ class ObservabilityConfigs
     return this._GetGlobalConfig().projectId;
   }
 
-  /** @returns {{credentials: ServiceAccountCredentials}} */
+  /** @returns {{credentials: ServiceAccountCredentials} | {keyFilename: string}} */
   static get credentials ()
   {
     return this._GetGlobalConfig().credentials;

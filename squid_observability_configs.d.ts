@@ -1,43 +1,5 @@
 declare module "squid_observability_configs" {
     export = ObservabilityConfigs;
-    /**
-     * @typedef {Object} ServiceAccountCredentials
-     * @property {string} [type]
-     * @property {string} [project_id]
-     * @property {string} [private_key_id]
-     * @property {string} [private_key]
-     * @property {string} [client_email]
-     * @property {string} [client_id]
-     * @property {string} [auth_uri]
-     * @property {string} [token_uri]
-     * @property {string} [auth_provider_x509_cert_url]
-     * @property {string} [client_x509_cert_url]
-     */
-    /**
-     * @typedef {Object} ServiceContext
-     * @property {'production' | 'staging' | 'local' | 'test' | string & {}} environment
-     * @property {string} service
-     * @property {string} version
-     * @property {string} applicationName
-     */
-    /**
-     * @typedef {Object} SourceReference
-     * @property {string} [repository]
-     * @property {string} [revisionId]
-     */
-    /**
-     * @typedef {Object} ObservabilitySettings
-     * @property {string} projectId
-     * @property {'production' | 'staging' | 'local' | 'test' | string & {}} environment
-     * @property {string} applicationName
-     * @property {string} version
-     * @property {string} [credentialsFilename]
-     * @property {string} [credentialsStringifiedObject]
-     * @property {ServiceAccountCredentials} [credentialsObject]
-     * @property {string} [applicationRepository]
-     * @property {string} [applicationRevisionId]
-    
-     */
     class ObservabilityConfigs {
         /**
          * @param {ObservabilityConfigs} observabilityConfigs
@@ -122,6 +84,7 @@ declare module "squid_observability_configs" {
         credentialsObject?: ServiceAccountCredentials | undefined;
         applicationRepository?: string | undefined;
         applicationRevisionId?: string | undefined;
+        debug?: boolean | undefined;
     };
 }
 //# sourceMappingURL=squid_observability_configs.d.ts.map

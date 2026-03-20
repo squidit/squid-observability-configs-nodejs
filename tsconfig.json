@@ -1,0 +1,16 @@
+{
+  "include": ["squid-observability-configs.ts", "tsup.config.ts"],
+  "exclude": ["dist", "node_modules", "libraries"],
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2022",
+    "types": ["node"],
+    "verbatimModuleSyntax": true
+  }
+}

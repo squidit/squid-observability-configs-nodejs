@@ -1,9 +1,22 @@
 {
   "name": "squid-observability-configs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Classe bibliotecada que centraliza as configurações comuns entre as bibliotecas de observabilidade da Squid.",
-  "main": "squid_observability_configs.js",
+  "type": "module",
+  "main": "./dist/squid-observability-configs.cjs",
+  "types": "./dist/squid-observability-configs.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/squid-observability-configs.d.ts",
+      "import": "./dist/squid-observability-configs.js",
+      "require": "./dist/squid-observability-configs.cjs",
+      "default": "./dist/squid-observability-configs.js"
+    }
+  },
   "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,7 +29,23 @@
     "url": "https://github.com/squidit/squid-observability-configs-nodejs/issues"
   },
   "homepage": "https://github.com/squidit/squid-observability-configs-nodejs#readme",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=8"
+  },
   "dependencies": {
     "squid-error": "file:libraries/squid-error-nodejs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@types/node": "^25.5.0",
+    "@typescript-eslint/parser": "^8.46.1",
+    "eslint": "^10.0.3",
+    "eslint-plugin-perfectionist": "^5.6.0",
+    "eslint-plugin-unicorn": "^63.0.0",
+    "globals": "^17.4.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
   }
 }

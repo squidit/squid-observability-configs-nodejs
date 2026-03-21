@@ -101,10 +101,10 @@ export default class ObservabilityConfigs {
 
   static SetGlobalConfig(observabilityConfigs: ObservabilityConfigs): ObservabilityConfigs {
     const g = globalThis as GlobalWithObs
-    if (!Reflect.has(globalThis, squidObservabilityConfigsUniqueSymbol)) {
-      g[squidObservabilityConfigsUniqueSymbol] = observabilityConfigs
-    }
-    return g[squidObservabilityConfigsUniqueSymbol]!
+    // Always overwrite so callers are not stuck behind a stale or empty singleton
+    // (e.g. duplicate installs, hot reload, or first caller that skipped assignment).
+    g[squidObservabilityConfigsUniqueSymbol] = observabilityConfigs
+    return observabilityConfigs
   }
 
   static _GetGlobalConfig(): ObservabilityConfigs | undefined {

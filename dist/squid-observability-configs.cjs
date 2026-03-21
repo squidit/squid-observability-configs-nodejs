@@ -82,10 +82,8 @@ class ObservabilityConfigs {
   }
   static SetGlobalConfig(observabilityConfigs) {
     const g = globalThis;
-    if (!Reflect.has(globalThis, squidObservabilityConfigsUniqueSymbol)) {
-      g[squidObservabilityConfigsUniqueSymbol] = observabilityConfigs;
-    }
-    return g[squidObservabilityConfigsUniqueSymbol];
+    g[squidObservabilityConfigsUniqueSymbol] = observabilityConfigs;
+    return observabilityConfigs;
   }
   static _GetGlobalConfig() {
     return globalThis[squidObservabilityConfigsUniqueSymbol];
